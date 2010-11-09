@@ -1,0 +1,28 @@
+<project name="UCTAnnotations-Build" default="build-uctannotations" basedir="."> 
+	<property name="src" value="/${basedir}\src" />  
+	<property name="build" value="classes" />  
+	<property name="dist" value="dist" />
+	<property name="test" value="${build}/br/com/furb/engenhariasoftware/test"/>
+	
+	<target name="init">  
+		<echo>Criando os diretório classes e dist.</echo>  
+		<mkdir dir="${build}" />  
+		<mkdir dir="${dist}" />  
+	</target>
+	
+	<target name="compile" depends="init">  
+		<echo>Compilando as classes do projeto.</echo>  
+		<javac srcdir="\${src}" destdir="${build}"/>  
+	</target>
+	
+	<target name="build-uctannotations" depends="clear,compile">  
+		<echo>Gerando o .jar do projeto.</echo>
+		<delete dir="${test}"/>
+		<jar jarfile="${dist}/UCTAnnotations.jar" basedir="${build}"/>  
+	</target>
+	
+	<target name="clear">  
+		<delete dir="${build}" />  
+		<delete dir="${dist}" />      
+	</target>
+</project>
