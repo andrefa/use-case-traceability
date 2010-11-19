@@ -9,9 +9,9 @@ public class Guard {
 			throw new CoreException(argument + " não pode ser nulo!");
 	}
 	
-	public static void isNotNullString(String object, String argument) throws CoreException{
+	public static void isNotEmptyString(String object, String argument) throws CoreException{
 		if(object == null || "".equals(object))
-			throw new CoreException("String "+argument + " não pode ser nula!");
+			throw new CoreException("String " + argument + " não pode ser nula!");
 	}
 	
 }

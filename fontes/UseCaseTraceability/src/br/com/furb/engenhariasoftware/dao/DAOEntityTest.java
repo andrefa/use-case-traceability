@@ -19,7 +19,7 @@ public class DAOEntityTest extends AbstractDAO {
 	
 	public void insert(EntityTest entityTest) throws Exception{
 		Guard.isNotNullObject(entityTest, "entityTest");
-		Guard.isNotNullString(entityTest.getName(), "entityTest.name");
+		Guard.isNotEmptyString(entityTest.getName(), "entityTest.name");
 		Guard.isNotNullObject(entityTest.getDate(), "entityTest.date");
 		
 		StringBuilder sql = new StringBuilder();
