@@ -15,7 +15,7 @@ SET SCHEMA PUBLIC
 INSERT INTO ENTITY_TEST VALUES(2,'Marcos','2010-10-26')
 INSERT INTO ENTITY_TEST VALUES(3,'Marcos','2010-10-26')
 INSERT INTO DUAL VALUES('X')
-INSERT INTO PROJECT VALUES(1,'VideoStore','/home/marcos/projects/UCT/fontes/VideoStore/bin')
+INSERT INTO PROJECT VALUES(1,'VideoStore','C:/projects/EngenhariaSoftware/UCT/fontes/VideoStore/bin')
 INSERT INTO FUNCTIONAL_REQUISITE VALUES('RF01','Cadastro de Filmes','O sistema deve permitir o cadastro de filmes.',1)
 INSERT INTO FUNCTIONAL_REQUISITE VALUES('RF02','Classifica\u00e7\u00e3o de Filmes em G\u00eaneros','O sistema deve permitir a classifica\u00e7\u00e3o do filme em diferentes g\u00eaneros.',1)
 INSERT INTO FUNCTIONAL_REQUISITE VALUES('RF03','Tempo de Loca\u00e7\u00e3o','O sistema deve permitir definir o tempo de loca\u00e7\u00e3o por filme.',1)

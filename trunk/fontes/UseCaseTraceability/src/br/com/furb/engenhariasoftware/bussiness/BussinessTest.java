@@ -69,7 +69,7 @@ public class BussinessTest extends AbstractBussiness {
 			daoBusinessRule = new DAOBusinessRule(this.getDataBaseManager());
 			daoImplementationRule = new DAOImplementationRule(this.getDataBaseManager());
 			
-			Project project = new Project(daoProject.getNexValueForProjectId(), "VideoStore", "/home/marcos/projects/UCT/fontes/VideoStore/bin");
+			Project project = new Project(daoProject.getNexValueForProjectId(), "VideoStore", "C:/projects/EngenhariaSoftware/UCT/fontes/VideoStore/bin");
 			
 			FunctionalRequisite fr1 = new FunctionalRequisite("RF01", "Cadastro de Filmes", "O sistema deve permitir o cadastro de filmes.");
 			FunctionalRequisite fr2 = new FunctionalRequisite("RF02", "Classificação de Filmes em Gêneros", "O sistema deve permitir a classificação do filme em diferentes gêneros.");
