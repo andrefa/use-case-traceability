@@ -13,7 +13,7 @@ public class BusinessHtmlReport extends AbstractBussiness {
 	public void generateHtmlReport(Project project) throws Exception{
 		StringBuilder html = new StringBuilder();
 		html.append("<html>");
-		html.append("<title>Relat√≥rio de Rastreabilidade</title>");
+		html.append("<title>RelatÛrio de Rastreabilidade</title>");
 		html.append("<body bgcolor='#1C1C1C'>");
 		
 		html.append("<TABLE border='1' width='100%'>");
@@ -30,10 +30,10 @@ public class BusinessHtmlReport extends AbstractBussiness {
 		html.append("Nome");
 		html.append("</TD>");
 		html.append("<TD align='center'>");
-		html.append("Descri√ß√£o");
+		html.append("DescriÁ„o");
 		html.append("</TD>");
 		html.append("<TD align='center'>");
-		html.append("M√©todos Implementados");
+		html.append("MÈtodos Implementados");
 		html.append("</TD>");
 		html.append("</TR>");
 		if(project.getFunctionalRequisites() != null){
@@ -76,7 +76,7 @@ public class BusinessHtmlReport extends AbstractBussiness {
 		html.append("Nome");
 		html.append("</TD>");
 		html.append("<TD align='center'>");
-		html.append("Descri√ß√£o");
+		html.append("DescriÁ„o");
 		html.append("</TD>");
 		html.append("<TD align='center'>");
 		html.append("Classes Implementadas");
@@ -111,7 +111,7 @@ public class BusinessHtmlReport extends AbstractBussiness {
 		html.append("<BR><TABLE style='top-margin: 20px;' border='1' width='100%'>");
 		html.append("<TR bgcolor='#E6E6FA'>");
 		html.append("<TD align='center' colspan='4'>");
-		html.append("Regras de Neg√≥cio");
+		html.append("Regras de NegÛcio");
 		html.append("</TD>");
 		html.append("</TR>");
 		html.append("<TR bgcolor='#E6E6FA'>");
@@ -122,10 +122,10 @@ public class BusinessHtmlReport extends AbstractBussiness {
 		html.append("Nome");
 		html.append("</TD>");
 		html.append("<TD align='center'>");
-		html.append("Descri√ß√£o");
+		html.append("DescriÁ„o");
 		html.append("</TD>");
 		html.append("<TD align='center'>");
-		html.append("M√©todos Implementados");
+		html.append("MÈtodos Implementados");
 		html.append("</TD>");
 		html.append("</TR>");
 		if(project.getBusinessRules() != null){
@@ -157,7 +157,7 @@ public class BusinessHtmlReport extends AbstractBussiness {
 		html.append("<BR><TABLE style='top-margin: 20px;' border='1' width='100%'>");
 		html.append("<TR bgcolor='#E6E6FA'>");
 		html.append("<TD align='center' colspan='4'>");
-		html.append("Regras de Implementa√ß√£o");
+		html.append("Regras de ImplementaÁ„o");
 		html.append("</TD>");
 		html.append("</TR>");
 		html.append("<TR bgcolor='#E6E6FA'>");
@@ -168,10 +168,10 @@ public class BusinessHtmlReport extends AbstractBussiness {
 		html.append("Nome");
 		html.append("</TD>");
 		html.append("<TD align='center'>");
-		html.append("Descri√ß√£o");
+		html.append("DescriÁ„o");
 		html.append("</TD>");
 		html.append("<TD align='center'>");
-		html.append("M√©todos Implementados");
+		html.append("MÈtodos Implementados");
 		html.append("</TD>");
 		html.append("</TR>");
 		if(project.getImplementationRules() != null){
@@ -203,12 +203,12 @@ public class BusinessHtmlReport extends AbstractBussiness {
 		html.append("</body>");
 		html.append("</html>");
 		
-		FileOutputStream fos = new FileOutputStream(new File("/home/marcos/√Årea de Trabalho/UCT.html"));
+		FileOutputStream fos = new FileOutputStream(new File("C:/projects/EngenhariaSoftware/UCT/fontes/UseCaseTraceability/tempReport/UCT.html"));
 		fos.write(html.toString().getBytes());
 		fos.flush();
 		fos.close();
 		Desktop desktop = Desktop.getDesktop();
-		desktop.browse(new File("/home/marcos/√Årea de Trabalho/UCT.html").toURI());
+		desktop.browse(new File("C:/projects/EngenhariaSoftware/UCT/fontes/UseCaseTraceability/tempReport/UCT.html").toURI());
 	}
 	
 	private String listToString(List<?> list){
