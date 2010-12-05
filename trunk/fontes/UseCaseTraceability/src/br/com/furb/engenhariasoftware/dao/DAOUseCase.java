@@ -1,12 +1,15 @@
 package br.com.furb.engenhariasoftware.dao;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import br.com.furb.engenhariasoftware.database.DataBaseManager;
 import br.com.furb.engenhariasoftware.entity.Project;
 import br.com.furb.engenhariasoftware.entity.UseCase;
+import br.com.furb.engenhariasoftware.gui.util.CurrentProject;
 import br.com.furb.engenhariasoftware.util.Guard;
 
 public class DAOUseCase extends AbstractDAO {
@@ -94,6 +97,27 @@ public class DAOUseCase extends AbstractDAO {
 		Integer valid = result.getInt("qtd");
 		
 		return valid > 0 ? false : true;
+	}
+	
+	public List<UseCase> getUseCases() throws Exception{
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT id, name, description FROM use_case WHERE project_id = ?");
+		
+		Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+		parameters.put(1, CurrentProject.getCurrentProject().getId());
+		
+		ResultSet result = this.getDataBaseManager().executeQuery(sql.toString(), parameters);
+		
+		List<UseCase> useCases = new ArrayList<UseCase>();
+		
+		while(result.next()){
+			UseCase useCase = new UseCase(result.getString("id"), 
+					                      result.getString("name"), 
+					                      result.getString("description"));
+			useCases.add(useCase);
+		}
+		
+		return useCases;
 	}
 
 }

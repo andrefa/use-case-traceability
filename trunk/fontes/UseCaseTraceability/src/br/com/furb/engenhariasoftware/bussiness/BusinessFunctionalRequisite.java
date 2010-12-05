@@ -1,5 +1,8 @@
 package br.com.furb.engenhariasoftware.bussiness;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.furb.engenhariasoftware.dao.DAOFunctionalRequisite;
 import br.com.furb.engenhariasoftware.entity.FunctionalRequisite;
 import br.com.furb.engenhariasoftware.entity.Project;
@@ -26,5 +29,51 @@ public class BusinessFunctionalRequisite extends AbstractBussiness {
 		}finally{
 			this.getDataBaseManager().close();
 		}
+	}
+	
+	public void remove(Project project, FunctionalRequisite functionalRequisite) throws CoreException{
+		DAOFunctionalRequisite dao = null;
+		try{
+			dao = new DAOFunctionalRequisite(this.getDataBaseManager());
+			
+			dao.remove(project, functionalRequisite);
+			
+			this.getDataBaseManager().commit();
+		}catch (Exception e) {
+			this.getDataBaseManager().rollback();
+			throw new CoreException(e);
+		}finally{
+			this.getDataBaseManager().close();
+		}
+	}
+	
+	public void update(Project project, FunctionalRequisite functionalRequisite) throws CoreException{
+		DAOFunctionalRequisite dao = null;
+		try{
+			dao = new DAOFunctionalRequisite(this.getDataBaseManager());
+			
+			dao.update(project, functionalRequisite);
+			
+			this.getDataBaseManager().commit();
+		}catch (Exception e) {
+			this.getDataBaseManager().rollback();
+			throw new CoreException(e);
+		}finally{
+			this.getDataBaseManager().close();
+		}
+	}
+	
+	public List<FunctionalRequisite> getAllFunctionalRequisite() throws CoreException{
+		DAOFunctionalRequisite dao = null;
+		List<FunctionalRequisite> functionalRequisites = new ArrayList<FunctionalRequisite>();
+		try{
+			dao = new DAOFunctionalRequisite(this.getDataBaseManager());
+			functionalRequisites = dao.getFunctionalRequisites();
+		}catch (Exception e) {
+			throw new CoreException(e);
+		}finally{
+			this.getDataBaseManager().close();
+		}
+		return functionalRequisites;
 	}
 }

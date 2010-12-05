@@ -18,9 +18,13 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JOptionPane;
 
+import br.com.furb.engenhariasoftware.bussiness.BusinessBusinessRule;
+import br.com.furb.engenhariasoftware.bussiness.BusinessFunctionalRequisite;
 import br.com.furb.engenhariasoftware.bussiness.BusinessHtmlReport;
+import br.com.furb.engenhariasoftware.bussiness.BusinessImplementationRule;
 import br.com.furb.engenhariasoftware.bussiness.BusinessProject;
 import br.com.furb.engenhariasoftware.bussiness.BusinessSweepSourceCode;
+import br.com.furb.engenhariasoftware.bussiness.BusinessUseCase;
 import br.com.furb.engenhariasoftware.entity.Project;
 import br.com.furb.engenhariasoftware.exception.CoreException;
 import br.com.furb.engenhariasoftware.gui.util.CurrentProject;
@@ -333,23 +337,47 @@ public class Init extends javax.swing.JFrame {
     }
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    	try{
+    		BusinessFunctionalRequisite bfr = new BusinessFunctionalRequisite();
+    		FunctionalRequisiteCrud frc = new FunctionalRequisiteCrud();
+    		frc.setDadosCombo(bfr.getAllFunctionalRequisite());
+            this.setNewView(frc);
+    	}catch (CoreException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
+		}
     }
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    	try{
+    		BusinessUseCase buc = new BusinessUseCase();
+    		UseCaseCrud ucc = new UseCaseCrud();
+    		ucc.setDadosCombo(buc.getAllUseCase());
+            this.setNewView(ucc);
+    	}catch (CoreException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
+		}
     }
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+    	try{
+    		BusinessBusinessRule bbr = new BusinessBusinessRule();
+    		BusinessRuleCrud brc = new BusinessRuleCrud();
+    		brc.setDadosCombo(bbr.getAllBusinessRule());
+            this.setNewView(brc);
+    	}catch (CoreException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
+		}
     }
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void jMenu1ActionPerformed(java.awt.event.MouseEvent evt) {
-        // TODO add your handling code here:
+    	try{
+    		BusinessImplementationRule bir = new BusinessImplementationRule();
+    		ImplementationRuleCrud irc = new ImplementationRuleCrud();
+    		irc.setDadosCombo(bir.getAllImplementationRule());
+            this.setNewView(irc);
+    	}catch (CoreException e) {
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
+		}
     }
     
     private void jMenu2ActionPerformed(java.awt.event.MouseEvent evt) {

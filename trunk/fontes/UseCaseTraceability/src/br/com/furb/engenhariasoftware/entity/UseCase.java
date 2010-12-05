@@ -51,19 +51,7 @@ public class UseCase {
 
 	@Override
 	public String toString() {
-		StringBuilder str = new StringBuilder();
-		str.append("id = ").append(this.id).append("\n");
-		str.append("name = ").append(this.name).append("\n");
-		str.append("description = ").append(this.description).append("\n");
-		str.append("classes = ").append("\n");
-		
-		if(this.classes != null){
-			for(String classe : this.classes){
-				str.append(classe).append("\n");
-			}
-		}
-		
-		return str.toString();
+		return this.id + " - " + this.name;
 	}
 	
 }

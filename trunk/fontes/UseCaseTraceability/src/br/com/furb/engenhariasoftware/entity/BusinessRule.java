@@ -50,19 +50,7 @@ public class BusinessRule {
 
 	@Override
 	public String toString() {
-		StringBuilder str = new StringBuilder();
-		str.append("id = ").append(this.id).append("\n");
-		str.append("name = ").append(this.name).append("\n");
-		str.append("description = ").append(this.description).append("\n");
-		str.append("methods = ").append("\n");
-		
-		if(this.methods != null){
-			for(String method : this.methods){
-				str.append(method).append("\n");
-			}
-		}
-		
-		return str.toString();
+		return this.id + " - " + this.name;
 	}
 	
 }
