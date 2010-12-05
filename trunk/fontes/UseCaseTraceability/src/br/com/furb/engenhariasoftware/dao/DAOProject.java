@@ -1,7 +1,9 @@
 package br.com.furb.engenhariasoftware.dao;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -178,6 +180,22 @@ public class DAOProject extends AbstractDAO {
 		ResultSet result = this.getDataBaseManager().executeQuery(sql.toString(), null);
 		result.next();
 		return result.getLong("seqValue");
+	}
+	
+	public List<Project> getProjects() throws Exception{
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT id, name, path_project FROM project");
+		
+		ResultSet result = this.getDataBaseManager().executeQuery(sql.toString(), null);
+		
+		List<Project> projects = new ArrayList<Project>();
+		
+		while(result.next()){
+			Project project = new Project(result.getLong("id"), result.getString("name"), result.getString("path_project"));
+			projects.add(project);
+		}
+		
+		return projects;
 	}
 
 }
