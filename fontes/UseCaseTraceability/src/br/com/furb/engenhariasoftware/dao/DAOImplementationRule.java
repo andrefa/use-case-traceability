@@ -1,5 +1,6 @@
 package br.com.furb.engenhariasoftware.dao;
 
+import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -70,6 +71,29 @@ public class DAOImplementationRule extends AbstractDAO {
 		parameters.put(2, project.getId());
 		
 		this.getDataBaseManager().execute(sql.toString(), parameters);
+	}
+	
+	public boolean validPk(Project project, ImplementationRule implementationRule) throws Exception{
+		Guard.isNotNullObject(project, "project");
+		Guard.isNotNullObject(project.getId(), "project.id");
+		Guard.isNotNullObject(implementationRule, "implementationRule");
+		Guard.isNotEmptyString(implementationRule.getId(), "implementationRule.id");
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT Count(*) AS qtd FROM implementation_rule ");
+		sql.append("WHERE project_id = ? AND id = ?");
+		
+		Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+		parameters.put(1, project.getId());
+		parameters.put(2, implementationRule.getId());
+		
+		ResultSet result = this.getDataBaseManager().executeQuery(sql.toString(), parameters);
+		
+		result.next();
+		
+		Integer valid = result.getInt("qtd");
+		
+		return valid > 0 ? false : true;
 	}
 
 }

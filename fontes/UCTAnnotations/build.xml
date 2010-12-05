@@ -1,5 +1,5 @@
 <project name="UCTAnnotations-Build" default="build-uctannotations" basedir="."> 
-	<property name="src" value="/${basedir}\src" />  
+	<property name="src" value="${basedir}/src" />  
 	<property name="build" value="classes" />  
 	<property name="dist" value="dist" />
 	<property name="test" value="${build}/br/com/furb/engenhariasoftware/test"/>
@@ -12,7 +12,7 @@
 	
 	<target name="compile" depends="init">  
 		<echo>Compilando as classes do projeto.</echo>  
-		<javac srcdir="\${src}" destdir="${build}"/>  
+		<javac srcdir="${src}" destdir="${build}"/>  
 	</target>
 	
 	<target name="build-uctannotations" depends="clear,compile">  

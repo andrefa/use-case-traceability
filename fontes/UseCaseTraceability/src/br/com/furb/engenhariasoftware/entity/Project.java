@@ -1,7 +1,6 @@
 package br.com.furb.engenhariasoftware.entity;
 
 import java.util.Map;
-import java.util.Set;
 
 public class Project {
 	private Long id;
@@ -82,43 +81,7 @@ public class Project {
 
 	@Override
 	public String toString() {
-		StringBuilder str = new StringBuilder();
-		str.append("id = ").append(this.id).append("\n");
-		str.append("name = ").append(this.name).append("\n");
-		str.append("path = ").append(this.path).append("\n");
-		str.append("functionalRequisites = ");
-		
-		Set<String> keys = this.functionalRequisites.keySet();
-		
-		for(String key : keys){
-			str.append(this.functionalRequisites.get(key).toString()).append("\n");
-		}
-		
-		str.append("useCases = ");
-		
-		keys = this.useCases.keySet();
-		
-		for(String key : keys){
-			str.append(this.useCases.get(key).toString()).append("\n");
-		}
-		
-		str.append("businessRules = ");
-		
-		keys = this.businessRules.keySet();
-		
-		for(String key : keys){
-			str.append(this.businessRules.get(key).toString()).append("\n");
-		}	
-		
-		str.append("implementationRules = ");
-		
-		keys = this.implementationRules.keySet();
-		
-		for(String key : keys){
-			str.append(this.implementationRules.get(key).toString()).append("\n");
-		}
-		
-		return str.toString();
+		return this.name;
 	}
 
 }
