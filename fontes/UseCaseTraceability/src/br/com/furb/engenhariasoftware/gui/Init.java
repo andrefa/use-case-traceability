@@ -68,7 +68,7 @@ public class Init extends javax.swing.JFrame {
         jMenuItem11 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Use Case Traceability (Marcos, Roger, Rafael)");
+        setTitle("Use Case Traceability");
         setResizable(false);
         setLocationByPlatform(true);
 
@@ -121,7 +121,7 @@ public class Init extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem4);
 
-        jMenuItem5.setText("Regras de Negócio");
+        jMenuItem5.setText("Regras de Negï¿½cio");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -129,7 +129,7 @@ public class Init extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem5);
 
-        jMenuItem6.setText("Regras de Implementação");
+        jMenuItem6.setText("Regras de Implementaï¿½ï¿½o");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -157,7 +157,7 @@ public class Init extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem8);
 
-        jMenuItem9.setText("Regras de Negócio");
+        jMenuItem9.setText("Regras de Negï¿½cio");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem9ActionPerformed(evt);
@@ -165,7 +165,7 @@ public class Init extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem9);
 
-        jMenuItem10.setText("Regras de Implementação");
+        jMenuItem10.setText("Regras de Implementaï¿½ï¿½o");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem10ActionPerformed(evt);
@@ -175,9 +175,9 @@ public class Init extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("Relatórios");
+        jMenu4.setText("Relatï¿½rios");
 
-        jMenuItem11.setText("Gerar Relatório de Rastreabilidade");
+        jMenuItem11.setText("Gerar Relatï¿½rio de Rastreabilidade");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem11ActionPerformed(evt);
