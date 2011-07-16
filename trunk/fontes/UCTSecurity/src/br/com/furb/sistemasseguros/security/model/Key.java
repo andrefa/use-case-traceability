@@ -5,6 +5,8 @@ public class Key {
 	private Long id;
 	private String key;
 	
+	public static final String SEQUENCE = "s_key_01";
+	
 	public Key(){}
 	
 	public Key(Long id, String key){

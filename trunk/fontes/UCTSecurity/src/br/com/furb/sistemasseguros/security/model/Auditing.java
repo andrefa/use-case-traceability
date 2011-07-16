@@ -1,6 +1,6 @@
 package br.com.furb.sistemasseguros.security.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Auditing {
 	
@@ -8,6 +8,8 @@ public class Auditing {
 	private User user;
 	private Date sysdate;
 	private String description;
+	
+	public static final String SEQUENCE = "s_auditing_01";
 	
 	public Auditing(){}
 	
