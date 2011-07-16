@@ -1,6 +1,8 @@
 package br.com.furb.sistemasseguros.security.bussiness;
 
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import br.com.furb.sistemasseguros.security.dao.DAOAuditing;
 import br.com.furb.sistemasseguros.security.dao.DAOUser;
@@ -8,7 +10,52 @@ import br.com.furb.sistemasseguros.security.model.Auditing;
 import br.com.furb.sistemasseguros.security.model.User;
 import br.com.furb.sistemasseguros.security.util.CryptoUtil;
 
-public class BssinessAutentication extends AbstractBussiness {
+public class BussinessAutentication extends AbstractBussiness {
+	
+	public boolean validatePassword(String login, String password) throws Exception{
+		
+		DAOUser daoUser = null;
+		DAOAuditing daoAuditing = null;
+		boolean validate = false;
+		
+		try{
+			daoAuditing = new DAOAuditing(this.getDataBaseManager());
+			daoUser = new DAOUser(this.getDataBaseManager());
+			
+			User user = daoUser.getUserById(login);
+			
+			Pattern padrao = Pattern.compile("(A-Za-z)|(0-9)");
+
+			Matcher pesquisa = padrao.matcher(password);  
+
+			validate = pesquisa.matches();
+			
+			if(validate){
+				Auditing auditing = new Auditing(daoAuditing.getNexValueForAuditingId(),
+                        user,
+                        new Date(),
+                        "Senha informada é válida. login - " + login);
+
+				daoAuditing.insert(user, auditing);
+			}else {
+				Auditing auditing = new Auditing(daoAuditing.getNexValueForAuditingId(),
+                        user,
+                        new Date(),
+                        "Senha informada não é válida. login - " + login);
+
+				daoAuditing.insert(user, auditing);
+			}
+			
+			this.getDataBaseManager().commit();
+		}catch (Exception e) {
+			this.getDataBaseManager().rollback();
+			throw new Exception(e);
+		}finally{
+			this.getDataBaseManager().close();
+		}
+		
+		return validate;
+	}
 	
 	public boolean validateLogin(String login, String password) throws Exception{
 		DAOUser daoUser = null;
@@ -27,6 +74,8 @@ public class BssinessAutentication extends AbstractBussiness {
 						                         "Erro na identificação do usuário - " + login);
 				daoAuditing.insert(null, auditing);
 				
+				this.getDataBaseManager().commit();
+				
 				return false;
 			}
 			
@@ -39,7 +88,9 @@ public class BssinessAutentication extends AbstractBussiness {
                                                  "Erro de autenticação de usuário");
 				
 				daoAuditing.insert(user, auditing);
-				                                 
+				
+				this.getDataBaseManager().commit();
+				
 				return false;
 			}
 			
@@ -50,6 +101,7 @@ public class BssinessAutentication extends AbstractBussiness {
 
 			daoAuditing.insert(user, auditing);
 			
+			this.getDataBaseManager().commit();
 		}catch (Exception e) {
 			this.getDataBaseManager().rollback();
 			throw new Exception(e);
@@ -58,6 +110,12 @@ public class BssinessAutentication extends AbstractBussiness {
 		}
 		
 		return true;
+	}
+	
+	public static void main(String[] args) throws Exception {
+		BussinessAutentication ba = new BussinessAutentication();
+		ba.validatePassword("dsadas", "sadsadsa");
+		ba.validatePassword("dsadas", "234234sadsadsa");
 	}
 
 }
