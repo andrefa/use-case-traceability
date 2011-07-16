@@ -52,6 +52,7 @@ public class DAOGroup extends AbstractDAO {
 		Group group = null;
 		
 		DAOKey daoKey = new DAOKey(this.getDataBaseManager());
+		DAOFunctionality daoFunctionality = new DAOFunctionality(this.getDataBaseManager());
 		
 		if(resultSet.next()){
 			group = new Group();
@@ -59,6 +60,7 @@ public class DAOGroup extends AbstractDAO {
 			group.setName(resultSet.getString("name"));
 			group.setDescription(resultSet.getString("description"));
 			group.setKey(daoKey.getKeyById(resultSet.getLong("key_id")));
+			group.setFeatures(daoFunctionality.getGroupFunctionalities(resultSet.getString("id")));
 		}
 		
 		return group;
