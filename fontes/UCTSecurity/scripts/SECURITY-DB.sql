@@ -87,7 +87,7 @@ REFERENCES group_table(id);
 ------------------------------------------------------------------------------------
 CREATE TABLE auditing(id   INTEGER  PRIMARY KEY,                                 
                       description VARCHAR NOT NULL,
-                      user_login VARCHAR NOT NULL,
+                      user_login VARCHAR,
                       sysdate TIMESTAMP NOT NULL);                                    
                                                                                   
 CREATE SEQUENCE s_auditing_01 AS INTEGER START WITH 1 INCREMENT BY 1; 

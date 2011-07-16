@@ -72,6 +72,7 @@ public class DAOUser extends AbstractDAO {
 		
 		DAOPassword daoPassword = new DAOPassword(this.getDataBaseManager());
 		DAOKey daoKey = new DAOKey(this.getDataBaseManager());
+		DAOGroup daoGroup = new DAOGroup(this.getDataBaseManager());
 		
 		if(resultSet.next()){
 			user = new User();
@@ -79,6 +80,7 @@ public class DAOUser extends AbstractDAO {
 			user.setName(resultSet.getString("name"));
 			user.setPassword(daoPassword.getPasswordById(resultSet.getLong("password_id")));
 			user.setKey(daoKey.getKeyById(resultSet.getLong("key_id")));
+			user.setGroups(daoGroup.getUserGroups(resultSet.getString("login")));
 		}
 		
 		return user;

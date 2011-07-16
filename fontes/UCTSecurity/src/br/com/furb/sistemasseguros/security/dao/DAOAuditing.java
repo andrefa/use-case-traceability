@@ -19,8 +19,6 @@ public class DAOAuditing extends AbstractDAO {
 	}
 	
 	public void insert(User user, Auditing auditing) throws Exception{
-		Guard.isNotNullObject(user, "user");
-		Guard.isNotEmptyString(user.getLogin(), "user.login");
 		Guard.isNotNullObject(auditing.getId(), "auditing.id");
 		Guard.isNotEmptyString(auditing.getDescription(), "auditing.description");
 		Guard.isNotNullObject(auditing.getSysdate(), "auditing.sysdate");
