@@ -35,16 +35,25 @@ REFERENCES key(id);
 CREATE TABLE group_table(id VARCHAR  PRIMARY KEY,                                 
                          name VARCHAR NOT NULL,
 		         description VARCHAR NOT NULL,
-		         key_id INTEGER NOT NULL,
-		         user_login VARCHAR NOT NULL);                                    
+		         key_id INTEGER NOT NULL);                                    
 
 ALTER TABLE group_table
 ADD CONSTRAINT grouptable_key_fk_01 
 FOREIGN KEY(key_id)
-REFERENCES key(id); 
+REFERENCES key(id);
+------------------------------------------------------------------------------------
+------------------------------------ GROUP_USER ------------------------------------
+------------------------------------------------------------------------------------
+CREATE TABLE group_user(user_login VARCHAR NOT NULL,
+                        group_id VARCHAR NOT NULL);                                    
 
-ALTER TABLE group_table
-ADD CONSTRAINT grouptable_user_fk_01 
+ALTER TABLE group_user
+ADD CONSTRAINT groupuser_grouptable_fk_01 
+FOREIGN KEY(group_id)
+REFERENCES group_table(id);
+
+ALTER TABLE group_user
+ADD CONSTRAINT groupuser_user_fk_01 
 FOREIGN KEY(user_login)
 REFERENCES user(login);
 ------------------------------------------------------------------------------------
@@ -52,16 +61,25 @@ REFERENCES user(login);
 ------------------------------------------------------------------------------------
 CREATE TABLE functionality(id VARCHAR  PRIMARY KEY,
 		           description VARCHAR NOT NULL,
-		           key_id INTEGER NOT NULL,
-		           group_id VARCHAR NOT NULL);                                    
+		           key_id INTEGER NOT NULL);                                    
 
 ALTER TABLE functionality
 ADD CONSTRAINT functionality_key_fk_01 
 FOREIGN KEY(key_id)
-REFERENCES key(id); 
+REFERENCES key(id);
+------------------------------------------------------------------------------------
+------------------------------------ FUNCTIONALITY_GROUP ---------------------------
+------------------------------------------------------------------------------------
+CREATE TABLE functionality_group(functionality_id VARCHAR NOT NULL,
+                                 group_id VARCHAR NOT NULL);                                    
 
-ALTER TABLE functionality
-ADD CONSTRAINT functionality_group_fk_01 
+ALTER TABLE functionality_group
+ADD CONSTRAINT functionalitygroup_functionality_fk_01 
+FOREIGN KEY(functionality_id)
+REFERENCES functionality(id);
+
+ALTER TABLE functionality_group
+ADD CONSTRAINT functionalitygroup_grouptable_fk_01 
 FOREIGN KEY(group_id)
 REFERENCES group_table(id);
 ------------------------------------------------------------------------------------
@@ -88,6 +106,8 @@ drop sequence s_password_01;
 drop sequence s_key_01;
 drop sequence s_auditing_01;
 drop table auditing;
+drop table group_user;
+drop table functionality_group;
 drop table functionality;
 drop table group_table;
 drop table user;

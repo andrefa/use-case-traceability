@@ -5,6 +5,8 @@ public class Password {
 	private Long id;
 	private String password;
 	
+	public static final String SEQUENCE = "s_password_01";
+	
 	public Password(){}
 	
 	public Password(Long id, String password){
