@@ -38,7 +38,8 @@ public class BussinessAutentication extends AbstractBussiness {
 
 			validate = pesquisa1.matches() &&
 			           pesquisa2.matches() &&
-			           pesquisa3.matches();
+			           pesquisa3.matches() &&
+			           password.length() > 5;
 			
 			if(validate){
 				Auditing auditing = new Auditing(daoAuditing.getNexValueForAuditingId(),
