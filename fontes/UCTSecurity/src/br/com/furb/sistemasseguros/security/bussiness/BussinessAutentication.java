@@ -24,11 +24,21 @@ public class BussinessAutentication extends AbstractBussiness {
 			
 			User user = daoUser.getUserById(login);
 			
-			Pattern padrao = Pattern.compile("(A-Za-z)|(0-9)");
+			String regex1 = "(.)*([A-Za-z])+(.)*";
+			String regex2 = "(.)*([0-9])+(.)*";
+			String regex3 = "(.)*([\\w])+(.)*";
+			
+			Pattern padrao1 = Pattern.compile(regex1);
+			Pattern padrao2 = Pattern.compile(regex2);
+			Pattern padrao3 = Pattern.compile(regex3); 
+			
+			Matcher pesquisa1 = padrao1.matcher(password); 
+			Matcher pesquisa2 = padrao2.matcher(password); 
+			Matcher pesquisa3 = padrao3.matcher(password); 
 
-			Matcher pesquisa = padrao.matcher(password);  
-
-			validate = pesquisa.matches();
+			validate = pesquisa1.matches() &&
+			           pesquisa2.matches() &&
+			           pesquisa3.matches();
 			
 			if(validate){
 				Auditing auditing = new Auditing(daoAuditing.getNexValueForAuditingId(),
@@ -110,12 +120,6 @@ public class BussinessAutentication extends AbstractBussiness {
 		}
 		
 		return true;
-	}
-	
-	public static void main(String[] args) throws Exception {
-		BussinessAutentication ba = new BussinessAutentication();
-		ba.validatePassword("dsadas", "sadsadsa");
-		ba.validatePassword("dsadas", "234234sadsadsa");
 	}
 
 }

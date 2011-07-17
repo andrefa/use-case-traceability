@@ -30,7 +30,7 @@ public class DAOAuditing extends AbstractDAO {
 		Map<Integer, Object> parameters = new HashMap<Integer, Object>();
 		parameters.put(1, auditing.getId());
 		parameters.put(2, auditing.getDescription());
-		parameters.put(3, user.getLogin());
+		parameters.put(3, user != null ? user.getLogin() : null);
 		parameters.put(4, auditing.getSysdate());
 		
 		this.getDataBaseManager().execute(sql.toString(), parameters);
