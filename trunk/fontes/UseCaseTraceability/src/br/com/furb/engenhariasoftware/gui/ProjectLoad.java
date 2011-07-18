@@ -16,16 +16,20 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import br.com.furb.engenhariasoftware.entity.Project;
+import br.com.furb.engenhariasoftware.gui.constants.Constants;
 import br.com.furb.engenhariasoftware.gui.util.CurrentProject;
+import br.com.furb.engenhariasoftware.gui.util.CurrentUser;
+import br.com.furb.sistemasseguros.security.bussiness.BussinessAccessControl;
 
 /**
  *
  * @author Marcos
  */
 public class ProjectLoad extends javax.swing.JPanel {
-
+	private Init init;
     /** Creates new form ProjectLoad */
-    public ProjectLoad() {
+    public ProjectLoad(Init init) {
+    	this.init = init;
         initComponents();
     }
 
@@ -108,6 +112,66 @@ public class ProjectLoad extends javax.swing.JPanel {
         try{
         	Project project = (Project)this.jComboBox1.getSelectedItem();
             CurrentProject.setCurrentProject(project);
+            
+            BussinessAccessControl accessControl = new BussinessAccessControl();
+	        try{
+		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+		        									   ,Constants.FUNCTIONAL_REQUISITE_SAVE)){
+		        	init.jMenuItem3.setEnabled(false);
+		        }else{
+		        	init.jMenuItem3.setEnabled(true);
+		        }
+		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+						   							   ,Constants.USE_CASE_SAVE)){
+		        	init.jMenuItem4.setEnabled(false);
+				}else{
+					init.jMenuItem4.setEnabled(true);
+				}
+		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+						   							   ,Constants.BUSINESS_RULE_SAVE)){
+		        	init.jMenuItem5.setEnabled(false);
+				}else{
+					init.jMenuItem5.setEnabled(true);
+				}
+		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+						   							   ,Constants.IMPLEMENTATION_RULE_SAVE)){
+		        	init.jMenuItem6.setEnabled(false);
+				}else{
+					init.jMenuItem6.setEnabled(true);
+				}
+		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+						   ,Constants.FUNCTIONAL_REQUISITE_VIEW)){
+		        	init.jMenuItem7.setEnabled(false);
+				}else{
+					init.jMenuItem7.setEnabled(true);
+				}
+				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+									   ,Constants.USE_CASE_VIEW)){
+					init.jMenuItem8.setEnabled(false);
+				}else{
+					init.jMenuItem8.setEnabled(true);
+				}
+				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+									   ,Constants.BUSINESS_RULE_VIEW)){
+					init.jMenuItem9.setEnabled(false);
+				}else{
+					init.jMenuItem9.setEnabled(true);
+				}
+				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+									   ,Constants.IMPLEMENTATION_RULE_VIEW)){
+					init.jMenuItem10.setEnabled(false);
+				}else{
+					init.jMenuItem10.setEnabled(true);
+				}
+				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+						,Constants.TRACEABILITY_REPORT_GENERATE)){
+					init.jMenuItem11.setEnabled(false);
+				}else{
+					init.jMenuItem11.setEnabled(true);
+				}
+	        }catch(Exception ex){
+	        	JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
+	        }
             
     		JOptionPane.showMessageDialog(null, "Projeto "+project.getName()+" carregado com sucesso!", "Info!", JOptionPane.INFORMATION_MESSAGE);
     	}catch (Exception e) {
