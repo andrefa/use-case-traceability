@@ -38,7 +38,7 @@ public class DAOAuditing extends AbstractDAO {
 	
 	public List<Auditing> getAuditings() throws Exception{
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT id, description, user_login, sysdate FROM auditing");
+		sql.append("SELECT a.id, a.description, a.user_login, a.sysdate as date FROM auditing a");
 		
 		ResultSet result = this.getDataBaseManager().executeQuery(sql.toString(), null);
 		
@@ -50,8 +50,9 @@ public class DAOAuditing extends AbstractDAO {
 			Auditing auditing = new Auditing();
 			auditing.setId(result.getLong("id"));
 			auditing.setDescription(result.getString("description"));
-			auditing.setUser(daoUser.getUserById(result.getString("user_login")));
-			auditing.setSysdate(DateFormatUtil.getDateOfTimestamp(result.getTimestamp("sysdate")));
+			auditing.setUser(result.getString("user_login") != null && !"".equals(result.getString("user_login"))
+					? daoUser.getUserById(result.getString("user_login")) : null);
+			auditing.setSysdate(DateFormatUtil.getDateOfTimestamp(result.getTimestamp("date")));
 			
 			auditings.add(auditing);
 		}

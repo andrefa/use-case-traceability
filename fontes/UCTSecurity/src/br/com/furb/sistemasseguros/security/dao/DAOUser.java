@@ -1,7 +1,9 @@
 package br.com.furb.sistemasseguros.security.dao;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import br.com.furb.sistemasseguros.security.database.DataBaseManager;
@@ -84,6 +86,32 @@ public class DAOUser extends AbstractDAO {
 		}
 		
 		return user;
+	}
+	
+	public List<User> getUsers() throws Exception{
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT login, name, password_id, key_id FROM user");
+
+		ResultSet resultSet = this.getDataBaseManager().executeQuery(sql.toString(), new HashMap<Integer, Object>());
+		
+		List<User> users = new ArrayList<User>();
+		
+		DAOPassword daoPassword = new DAOPassword(this.getDataBaseManager());
+		DAOKey daoKey = new DAOKey(this.getDataBaseManager());
+		DAOGroup daoGroup = new DAOGroup(this.getDataBaseManager());
+		
+		while(resultSet.next()){
+			User user = new User();
+			user.setLogin(resultSet.getString("login"));
+			user.setName(resultSet.getString("name"));
+			user.setPassword(daoPassword.getPasswordById(resultSet.getLong("password_id")));
+			user.setKey(daoKey.getKeyById(resultSet.getLong("key_id")));
+			user.setGroups(daoGroup.getUserGroups(resultSet.getString("login")));
+			
+			users.add(user);
+		}
+		
+		return users;
 	}
 
 }
