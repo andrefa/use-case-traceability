@@ -30,7 +30,7 @@ public class BussinessAccessControl extends AbstractBussiness {
 			
 			for(Group group : user.getGroups()){
 				for(Functionality func : group.getFeatures()){
-					if(idFunctionality.equals(AesUtil.decrypt(func.getKey().getKey(), func.getId()))){
+					if(idFunctionality.equals(func.getId())){
 						
 						Auditing auditing = new Auditing(daoAuditing.getNexValueForAuditingId(),
 		                                                 user,
