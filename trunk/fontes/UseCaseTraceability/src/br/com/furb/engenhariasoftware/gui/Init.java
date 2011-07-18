@@ -14,8 +14,6 @@ package br.com.furb.engenhariasoftware.gui;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JOptionPane;
@@ -399,18 +397,26 @@ public class Init extends javax.swing.JFrame {
 		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
 		        									   ,Constants.FUNCTIONAL_REQUISITE_SAVE)){
 		        	jMenuItem3.setEnabled(false);
+		        }else{
+		        	jMenuItem3.setEnabled(true);
 		        }
 		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
 						   							   ,Constants.USE_CASE_SAVE)){
 		        	jMenuItem4.setEnabled(false);
+				}else{
+					jMenuItem4.setEnabled(true);
 				}
 		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
 						   							   ,Constants.BUSINESS_RULE_SAVE)){
 		        	jMenuItem5.setEnabled(false);
+				}else{
+					jMenuItem5.setEnabled(true);
 				}
 		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
 						   							   ,Constants.IMPLEMENTATION_RULE_SAVE)){
 		        	jMenuItem6.setEnabled(false);
+				}else{
+					jMenuItem6.setEnabled(true);
 				}
 	        }catch(Exception ex){
 	        	JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
@@ -431,18 +437,26 @@ public class Init extends javax.swing.JFrame {
 		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
 									   ,Constants.FUNCTIONAL_REQUISITE_VIEW)){
 		        	jMenuItem7.setEnabled(false);
+				}else{
+					jMenuItem7.setEnabled(true);
 				}
 				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
 									   ,Constants.USE_CASE_VIEW)){
 					jMenuItem8.setEnabled(false);
+				}else{
+					jMenuItem8.setEnabled(true);
 				}
 				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
 									   ,Constants.BUSINESS_RULE_VIEW)){
 					jMenuItem9.setEnabled(false);
+				}else{
+					jMenuItem9.setEnabled(true);
 				}
 				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
 									   ,Constants.IMPLEMENTATION_RULE_VIEW)){
 					jMenuItem10.setEnabled(false);
+				}else{
+					jMenuItem10.setEnabled(true);
 				}
 	        }catch(Exception ex){
 	        	JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
@@ -459,6 +473,8 @@ public class Init extends javax.swing.JFrame {
 				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
 						,Constants.TRACEABILITY_REPORT_GENERATE)){
 					jMenuItem11.setEnabled(false);
+				}else{
+					jMenuItem11.setEnabled(true);
 				}
 	        }catch(Exception ex){
 	        	JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
