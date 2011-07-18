@@ -39,6 +39,8 @@ public class BussinessAccessControl extends AbstractBussiness {
 
 						daoAuditing.insert(user, auditing);
 						
+						this.getDataBaseManager().commit();
+						
 						return true;
 					}
 				}
@@ -51,6 +53,7 @@ public class BussinessAccessControl extends AbstractBussiness {
 
 			daoAuditing.insert(user, auditing);
 			
+			this.getDataBaseManager().commit();
 		}catch (Exception e) {
 			this.getDataBaseManager().rollback();
 			throw new Exception(e);
