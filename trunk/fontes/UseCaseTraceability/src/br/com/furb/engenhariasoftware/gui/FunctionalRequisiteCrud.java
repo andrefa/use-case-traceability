@@ -19,8 +19,11 @@ import br.com.furb.engenhariasoftware.bussiness.BusinessFunctionalRequisite;
 import br.com.furb.engenhariasoftware.bussiness.BusinessProject;
 import br.com.furb.engenhariasoftware.entity.FunctionalRequisite;
 import br.com.furb.engenhariasoftware.exception.CoreException;
+import br.com.furb.engenhariasoftware.gui.constants.Constants;
 import br.com.furb.engenhariasoftware.gui.util.CurrentProject;
+import br.com.furb.engenhariasoftware.gui.util.CurrentUser;
 import br.com.furb.engenhariasoftware.gui.util.ValidateField;
+import br.com.furb.sistemasseguros.security.bussiness.BussinessAccessControl;
 
 
 /**
@@ -29,10 +32,31 @@ import br.com.furb.engenhariasoftware.gui.util.ValidateField;
  */
 public class FunctionalRequisiteCrud extends javax.swing.JPanel {
 	private FunctionalRequisite frSelected; 
+	private boolean canUpdate;
+	private boolean canDelete;
 	
     /** Creates new form FunctionalRequisiteCrud */
     public FunctionalRequisiteCrud() {
+    	BussinessAccessControl accessControl = new BussinessAccessControl();
+    	try {
+    		canUpdate = accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin(), 
+    														Constants.FUNCTIONAL_REQUISITE_UPDATE);
+    	
+			canDelete = accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin(), 
+															Constants.FUNCTIONAL_REQUISITE_DELETE);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Erro a validar permissão do usuário.", "Erro!", JOptionPane.ERROR_MESSAGE);
+		}
         initComponents();
+        assignPermission();
+    }
+    
+    private void assignPermission(){
+    	jTextField2.setEditable(canUpdate);
+    	jTextArea1.setEditable(canUpdate);
+    	jButton2.setEnabled(canUpdate);
+    	
+    	jButton3.setEnabled(canDelete);
     }
 
     /** This method is called from within the constructor to
