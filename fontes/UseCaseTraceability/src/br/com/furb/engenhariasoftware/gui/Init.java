@@ -70,7 +70,17 @@ public class Init extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu(); // Menu relatórios
         jMenuItem11 = new javax.swing.JMenuItem(); // Item gerar relatório rastreabilidade
 
-        
+        //jMenuItem1.setEnabled(false);
+        jMenuItem10.setEnabled(false);
+        jMenuItem11.setEnabled(false);
+        //jMenuItem2.setEnabled(false);
+        jMenuItem3.setEnabled(false);
+        jMenuItem4.setEnabled(false);
+        jMenuItem5.setEnabled(false);
+        jMenuItem6.setEnabled(false);
+        jMenuItem7.setEnabled(false);
+        jMenuItem8.setEnabled(false);
+        jMenuItem9.setEnabled(false);
         
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Use Case Traceability");
@@ -307,7 +317,7 @@ public class Init extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {
     	try{
-    		ProjectLoad pl = new ProjectLoad();
+    		ProjectLoad pl = new ProjectLoad(this);
         	BusinessProject bp = new BusinessProject();
         	pl.setDadosComboboxProjetos(bp.getAllProjects());
             this.setNewView(pl);
@@ -391,37 +401,7 @@ public class Init extends javax.swing.JFrame {
         	jMenuItem4.setEnabled(false);
         	jMenuItem5.setEnabled(false);
         	jMenuItem6.setEnabled(false);
-    	}else {
-	    	BussinessAccessControl accessControl = new BussinessAccessControl();
-	        try{
-		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
-		        									   ,Constants.FUNCTIONAL_REQUISITE_SAVE)){
-		        	jMenuItem3.setEnabled(false);
-		        }else{
-		        	jMenuItem3.setEnabled(true);
-		        }
-		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
-						   							   ,Constants.USE_CASE_SAVE)){
-		        	jMenuItem4.setEnabled(false);
-				}else{
-					jMenuItem4.setEnabled(true);
-				}
-		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
-						   							   ,Constants.BUSINESS_RULE_SAVE)){
-		        	jMenuItem5.setEnabled(false);
-				}else{
-					jMenuItem5.setEnabled(true);
-				}
-		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
-						   							   ,Constants.IMPLEMENTATION_RULE_SAVE)){
-		        	jMenuItem6.setEnabled(false);
-				}else{
-					jMenuItem6.setEnabled(true);
-				}
-	        }catch(Exception ex){
-	        	JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
-	        }
-        }
+    	}
     }
     
     private void jMenu3ActionPerformed(java.awt.event.MouseEvent evt) {
@@ -430,55 +410,12 @@ public class Init extends javax.swing.JFrame {
         	jMenuItem8.setEnabled(false);
         	jMenuItem9.setEnabled(false);
         	jMenuItem10.setEnabled(false);
-    	}else {
-	    	BussinessAccessControl accessControl = new BussinessAccessControl();
-	        
-	        try{
-		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
-									   ,Constants.FUNCTIONAL_REQUISITE_VIEW)){
-		        	jMenuItem7.setEnabled(false);
-				}else{
-					jMenuItem7.setEnabled(true);
-				}
-				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
-									   ,Constants.USE_CASE_VIEW)){
-					jMenuItem8.setEnabled(false);
-				}else{
-					jMenuItem8.setEnabled(true);
-				}
-				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
-									   ,Constants.BUSINESS_RULE_VIEW)){
-					jMenuItem9.setEnabled(false);
-				}else{
-					jMenuItem9.setEnabled(true);
-				}
-				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
-									   ,Constants.IMPLEMENTATION_RULE_VIEW)){
-					jMenuItem10.setEnabled(false);
-				}else{
-					jMenuItem10.setEnabled(true);
-				}
-	        }catch(Exception ex){
-	        	JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
-	        }
     	}
     }
     
     private void jMenu4ActionPerformed(java.awt.event.MouseEvent evt) {
     	if(CurrentProject.getCurrentProject() == null) {
         	jMenuItem11.setEnabled(false);
-    	}else {
-	    	BussinessAccessControl accessControl = new BussinessAccessControl();
-	        try{
-				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
-						,Constants.TRACEABILITY_REPORT_GENERATE)){
-					jMenuItem11.setEnabled(false);
-				}else{
-					jMenuItem11.setEnabled(true);
-				}
-	        }catch(Exception ex){
-	        	JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
-	        }
     	}
     }
     
@@ -512,17 +449,17 @@ public class Init extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
+    public javax.swing.JMenuItem jMenuItem1;
+    public javax.swing.JMenuItem jMenuItem10;
+    public javax.swing.JMenuItem jMenuItem11;
+    public javax.swing.JMenuItem jMenuItem2;
+    public javax.swing.JMenuItem jMenuItem3;
+    public javax.swing.JMenuItem jMenuItem4;
+    public javax.swing.JMenuItem jMenuItem5;
+    public javax.swing.JMenuItem jMenuItem6;
+    public javax.swing.JMenuItem jMenuItem7;
+    public javax.swing.JMenuItem jMenuItem8;
+    public javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration
 
