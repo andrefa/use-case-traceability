@@ -14,6 +14,8 @@ package br.com.furb.engenhariasoftware.gui;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JOptionPane;
@@ -27,7 +29,10 @@ import br.com.furb.engenhariasoftware.bussiness.BusinessSweepSourceCode;
 import br.com.furb.engenhariasoftware.bussiness.BusinessUseCase;
 import br.com.furb.engenhariasoftware.entity.Project;
 import br.com.furb.engenhariasoftware.exception.CoreException;
+import br.com.furb.engenhariasoftware.gui.constants.Constants;
 import br.com.furb.engenhariasoftware.gui.util.CurrentProject;
+import br.com.furb.engenhariasoftware.gui.util.CurrentUser;
+import br.com.furb.sistemasseguros.security.bussiness.BussinessAccessControl;
 
 /**
  *
@@ -51,22 +56,24 @@ public class Init extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu(); // Menu projeto
+        jMenuItem1 = new javax.swing.JMenuItem(); // Item carregar
+        jMenuItem2 = new javax.swing.JMenuItem(); // Item novo
+        jMenu2 = new javax.swing.JMenu(); // Menu cadastros
+        jMenuItem3 = new javax.swing.JMenuItem(); // Item requisitos funcionais
+        jMenuItem4 = new javax.swing.JMenuItem(); // Item casos de uso
+        jMenuItem5 = new javax.swing.JMenuItem(); // Item regras de negócio
+        jMenuItem6 = new javax.swing.JMenuItem(); // Item regras de implementação
+        jMenu3 = new javax.swing.JMenu(); // Menu consultas
+        jMenuItem7 = new javax.swing.JMenuItem(); // Item requisitos funcionais
+        jMenuItem8 = new javax.swing.JMenuItem(); // Item casos de uso
+        jMenuItem9 = new javax.swing.JMenuItem(); // Item regras de negócio
+        jMenuItem10 = new javax.swing.JMenuItem(); // Item regras de implementação
+        jMenu4 = new javax.swing.JMenu(); // Menu relatórios
+        jMenuItem11 = new javax.swing.JMenuItem(); // Item gerar relatório rastreabilidade
 
+        
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Use Case Traceability");
         setResizable(false);
@@ -195,22 +202,22 @@ public class Init extends javax.swing.JFrame {
             
             @Override
             public void mouseDragged(MouseEvent e) {
-            	jMenu2ActionPerformed(e);
+            	//jMenu2ActionPerformed(e);
             }
             
             @Override
             public void mouseEntered(MouseEvent e) {
-            	jMenu2ActionPerformed(e);
+            	//jMenu2ActionPerformed(e);
             }
             
             @Override
             public void mouseExited(MouseEvent e) {
-            	jMenu2ActionPerformed(e);
+            	//jMenu2ActionPerformed(e);
             }
             
             @Override
             public void mousePressed(MouseEvent e) {
-            	jMenu2ActionPerformed(e);
+            	//jMenu2ActionPerformed(e);
             }
             
             @Override
@@ -227,22 +234,22 @@ public class Init extends javax.swing.JFrame {
             
             @Override
             public void mouseDragged(MouseEvent e) {
-            	jMenu3ActionPerformed(e);
+            	//jMenu3ActionPerformed(e);
             }
             
             @Override
             public void mouseEntered(MouseEvent e) {
-            	jMenu3ActionPerformed(e);
+            	//jMenu3ActionPerformed(e);
             }
             
             @Override
             public void mouseExited(MouseEvent e) {
-            	jMenu3ActionPerformed(e);
+            	//jMenu3ActionPerformed(e);
             }
             
             @Override
             public void mousePressed(MouseEvent e) {
-            	jMenu3ActionPerformed(e);
+            	//jMenu3ActionPerformed(e);
             }
             
             @Override
@@ -259,22 +266,22 @@ public class Init extends javax.swing.JFrame {
             
             @Override
             public void mouseDragged(MouseEvent e) {
-            	jMenu4ActionPerformed(e);
+            	//jMenu4ActionPerformed(e);
             }
             
             @Override
             public void mouseEntered(MouseEvent e) {
-            	jMenu4ActionPerformed(e);
+            	//jMenu4ActionPerformed(e);
             }
             
             @Override
             public void mouseExited(MouseEvent e) {
-            	jMenu4ActionPerformed(e);
+            	//jMenu4ActionPerformed(e);
             }
             
             @Override
             public void mousePressed(MouseEvent e) {
-            	jMenu4ActionPerformed(e);
+            	//jMenu4ActionPerformed(e);
             }
             
             @Override
@@ -381,39 +388,82 @@ public class Init extends javax.swing.JFrame {
     }
     
     private void jMenu2ActionPerformed(java.awt.event.MouseEvent evt) {
-    	if(CurrentProject.getCurrentProject() == null){
-        	this.jMenuItem3.setEnabled(false);
-        	this.jMenuItem4.setEnabled(false);
-        	this.jMenuItem5.setEnabled(false);
-        	this.jMenuItem6.setEnabled(false);
-        }else{
-        	this.jMenuItem3.setEnabled(true);
-        	this.jMenuItem4.setEnabled(true);
-        	this.jMenuItem5.setEnabled(true);
-        	this.jMenuItem6.setEnabled(true);
+    	if(CurrentProject.getCurrentProject() == null) {
+    		jMenuItem3.setEnabled(false);
+        	jMenuItem4.setEnabled(false);
+        	jMenuItem5.setEnabled(false);
+        	jMenuItem6.setEnabled(false);
+    	}else {
+	    	BussinessAccessControl accessControl = new BussinessAccessControl();
+	        try{
+		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+		        									   ,Constants.FUNCTIONAL_REQUISITE_SAVE)){
+		        	jMenuItem3.setEnabled(false);
+		        }
+		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+						   							   ,Constants.USE_CASE_SAVE)){
+		        	jMenuItem4.setEnabled(false);
+				}
+		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+						   							   ,Constants.BUSINESS_RULE_SAVE)){
+		        	jMenuItem5.setEnabled(false);
+				}
+		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+						   							   ,Constants.IMPLEMENTATION_RULE_SAVE)){
+		        	jMenuItem6.setEnabled(false);
+				}
+	        }catch(Exception ex){
+	        	JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
+	        }
         }
     }
     
     private void jMenu3ActionPerformed(java.awt.event.MouseEvent evt) {
-    	if(CurrentProject.getCurrentProject() == null){
-    		this.jMenuItem7.setEnabled(false);
-        	this.jMenuItem8.setEnabled(false);
-        	this.jMenuItem9.setEnabled(false);
-        	this.jMenuItem10.setEnabled(false);
-        }else{
-        	this.jMenuItem7.setEnabled(true);
-        	this.jMenuItem8.setEnabled(true);
-        	this.jMenuItem9.setEnabled(true);
-        	this.jMenuItem10.setEnabled(true);
-        }
+    	if(CurrentProject.getCurrentProject() == null) {
+        	jMenuItem7.setEnabled(false);
+        	jMenuItem8.setEnabled(false);
+        	jMenuItem9.setEnabled(false);
+        	jMenuItem10.setEnabled(false);
+    	}else {
+	    	BussinessAccessControl accessControl = new BussinessAccessControl();
+	        
+	        try{
+		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+									   ,Constants.FUNCTIONAL_REQUISITE_VIEW)){
+		        	jMenuItem7.setEnabled(false);
+				}
+				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+									   ,Constants.USE_CASE_VIEW)){
+					jMenuItem8.setEnabled(false);
+				}
+				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+									   ,Constants.BUSINESS_RULE_VIEW)){
+					jMenuItem9.setEnabled(false);
+				}
+				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+									   ,Constants.IMPLEMENTATION_RULE_VIEW)){
+					jMenuItem10.setEnabled(false);
+				}
+	        }catch(Exception ex){
+	        	JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
+	        }
+    	}
     }
     
     private void jMenu4ActionPerformed(java.awt.event.MouseEvent evt) {
-    	if(CurrentProject.getCurrentProject() == null){
-    		this.jMenuItem11.setEnabled(false);
-        }else{
-        	this.jMenuItem11.setEnabled(true);
-        }
+    	if(CurrentProject.getCurrentProject() == null) {
+        	jMenuItem11.setEnabled(false);
+    	}else {
+	    	BussinessAccessControl accessControl = new BussinessAccessControl();
+	        try{
+				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+						,Constants.TRACEABILITY_REPORT_GENERATE)){
+					jMenuItem11.setEnabled(false);
+				}
+	        }catch(Exception ex){
+	        	JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
+	        }
+    	}
     }
     
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -430,17 +480,6 @@ public class Init extends javax.swing.JFrame {
 		}catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 		}
-    }
-
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Init().setVisible(true);
-            }
-        });
     }
 
     public void setNewView(Component view){
@@ -471,4 +510,67 @@ public class Init extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration
 
+    private void assignMenuPermissions(){
+    	
+    	if(CurrentProject.getCurrentProject() == null) {
+    		this.jMenuItem3.setEnabled(false);
+        	this.jMenuItem4.setEnabled(false);
+        	this.jMenuItem5.setEnabled(false);
+        	this.jMenuItem6.setEnabled(false);
+        	
+        	this.jMenuItem7.setEnabled(false);
+        	this.jMenuItem8.setEnabled(false);
+        	this.jMenuItem9.setEnabled(false);
+        	this.jMenuItem10.setEnabled(false);
+        	
+        	this.jMenuItem11.setEnabled(false);
+    	}else {
+	    	BussinessAccessControl accessControl = new BussinessAccessControl();
+	        
+	        // Validação das permissões do usuário
+	        try{
+	        	// CREATE
+		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+		        									   ,Constants.FUNCTIONAL_REQUISITE_SAVE)){
+		        	jMenuItem3.setEnabled(false);
+		        }
+		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+						   							   ,Constants.USE_CASE_SAVE)){
+		        	jMenuItem4.setEnabled(false);
+				}
+		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+						   							   ,Constants.BUSINESS_RULE_SAVE)){
+		        	jMenuItem5.setEnabled(false);
+				}
+		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+						   							   ,Constants.IMPLEMENTATION_RULE_SAVE)){
+		        	jMenuItem6.setEnabled(false);
+				}
+		        
+		        // READ
+		        if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+									   ,Constants.FUNCTIONAL_REQUISITE_VIEW)){
+		        	jMenuItem7.setEnabled(false);
+				}
+				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+									   ,Constants.USE_CASE_VIEW)){
+					jMenuItem8.setEnabled(false);
+				}
+				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+									   ,Constants.BUSINESS_RULE_VIEW)){
+					jMenuItem9.setEnabled(false);
+				}
+				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+									   ,Constants.IMPLEMENTATION_RULE_VIEW)){
+					jMenuItem10.setEnabled(false);
+				}
+				if(!accessControl.validateAccessControl(CurrentUser.getCurrentUser().getLogin()
+						,Constants.TRACEABILITY_REPORT_GENERATE)){
+					jMenuItem11.setEnabled(false);
+				}
+	        }catch(Exception e){
+	        	JOptionPane.showMessageDialog(null, e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
+	        }
+    	}
+    }
 }
