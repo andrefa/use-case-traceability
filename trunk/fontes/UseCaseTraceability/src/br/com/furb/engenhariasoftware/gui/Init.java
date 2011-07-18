@@ -15,6 +15,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
@@ -69,6 +70,8 @@ public class Init extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem(); // Item regras de implementação
         jMenu4 = new javax.swing.JMenu(); // Menu relatórios
         jMenuItem11 = new javax.swing.JMenuItem(); // Item gerar relatório rastreabilidade
+        jMenu5 = new javax.swing.JMenu(); // Logout 
+        jMenu6 = new javax.swing.JMenu(); // Sair 
 
         //jMenuItem1.setEnabled(false);
         jMenuItem10.setEnabled(false);
@@ -201,6 +204,81 @@ public class Init extends javax.swing.JFrame {
         jMenu4.add(jMenuItem11);
 
         jMenuBar1.add(jMenu4);
+        
+        jMenu5.setText("Logout");
+        jMenuBar1.add(jMenu5);
+        jMenu5.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				java.awt.EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						new InitLogin().setVisible(true);
+					}
+				});
+				Init.this.dispose();
+			}
+		});
+        
+        jMenuBar1.add(jMenu5);
+        
+        jMenu6.setText("Sair");
+        jMenuBar1.add(jMenu6);
+        jMenu6.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				//Init.this.dispose();
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				//Init.this.dispose();
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Init.this.dispose();
+			}
+		});
+        
+        jMenuBar1.add(jMenu6);
 
         jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
@@ -448,6 +526,8 @@ public class Init extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     public javax.swing.JMenuItem jMenuItem1;
     public javax.swing.JMenuItem jMenuItem10;
