@@ -1,0 +1,1 @@
+Projeto sobre engenharia de software que tem como finalidade facilitar a rastreabilidade através do uso de annotations em java.
